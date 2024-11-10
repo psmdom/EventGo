@@ -5,8 +5,8 @@ var locations = "Room 101, Library";
 
 var RealContent = `
   <strong>${titles}</strong><br>
-  <em$>Timing:</em${timings}<br>
-  <em>Location:</em> ${locations}
+  <em>Timing: </em> ${timings} <br>
+  <em>Location: </em> ${locations}
 `;
 
 
@@ -25,11 +25,11 @@ function makeIcon(url) {
     })
 }
 
-const iconChilling = makeIcon('static/images/icons/icon-chilling.png')
-const iconExploring = makeIcon('static/images/icons/icon-exploring.png')
-const iconExercising = makeIcon('static/images/icons/icon-exercising.png')
-const iconSocializing = makeIcon('static/images/icons/icon-socializing.png')
-const iconStudying = makeIcon('static/images/icons/icon-studying.png')
+const iconChilling = makeIcon('static/images/map-icons/chilling.png')
+const iconExploring = makeIcon('static/images/map-icons/exploring.png')
+const iconExercising = makeIcon('static/images/map-icons/exercising.png')
+const iconSocializing = makeIcon('static/images/map-icons/socializing.png')
+const iconStudying = makeIcon('static/images/map-icons/studying.png')
 const currentIcon = iconExercising
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
