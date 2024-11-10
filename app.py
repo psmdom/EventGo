@@ -72,14 +72,14 @@ def login():
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
-                return redirect(url_for('map'))
+                return redirect(url_for('dashboard'))
     return render_template('login.html', form=form)
 
 
-@app.route('/map', methods=['GET', 'POST'])
+@app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
-def map():
-    return render_template('map.html')
+def dashboard():
+    return render_template('dashboard.html')
 
 
 @app.route('/logout', methods=['GET', 'POST'])

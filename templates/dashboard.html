@@ -1,0 +1,90 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>= -->
+    
+</head>
+
+<body>
+    <h1>Hello you are logged in. {{ current_user.username }}</h1>
+    <a href="{{url_for('logout')}}">Press here to logout</a>
+</body>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UBC Map with Plus Button</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+    <style>
+        /* Set the height of the map */
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+
+        /* Styling for the plus button */
+        .plus-button {
+            position: fixed;
+            right: 20px;  /* Distance from the right side */
+            bottom: 20px; /* Distance from the bottom */
+            width: 60px;
+            height: 60px;
+            background-color: #2F5C7F; /* Color similar to your image */
+            border-radius: 50%; /* Makes the button circular */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white; /* Color of the plus sign */
+            font-size: 36px; /* Size of the plus sign */
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+            text-decoration: none; /* Removes underline if using a link */
+            z-index: 1000; /* Ensures button stays on top of map */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Map Container -->
+    <div id="map"></div>
+
+    <!-- Plus Button -->
+    <div class="plus-button">+</div>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <script>
+        // Initialize the map and set its view to UBC area
+        const map = L.map('map').setView([49.26036, -123.24961], 14); // Coordinates near UBC, Vancouver
+
+        // Add a tile layer to the map (OpenStreetMap here, but you can choose another source)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Add markers to the map
+        L.marker([49.2673, -123.259]).addTo(map)
+            .bindPopup('Wreck Beach')
+            .openPopup();
+
+        L.marker([49.2692, -123.253]).addTo(map)
+            .bindPopup('Museum of Anthropology at UBC');
+
+        L.marker([49.2548, -123.234]).addTo(map)
+            .bindPopup('Beaty Biodiversity Museum');
+    </script>
+</body>
+</html>

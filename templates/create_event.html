@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event</title>
+</head>
+<body>
+    <h1>Create an Event</h1>
+    <form action="/submit_event" method="POST">
+        <label for="title">Event Title:</label><br>
+        <input type="text" id="title" name="title" required><br><br>
+        
+        <label for="location">Event Location:</label><br>
+        <input type="text" id="location" name="location" required><br><br>
+        
+        <label for="timeframe">Event Timeframe:</label><br>
+        <input type="datetime-local" id="timeframe" name="timeframe" required><br><br>
+        
+        <label for="category">Event Category:</label><br>
+        <select id="category" name="category" required>
+            <option value="academics">Academics</option>
+            <option value="socialising">Socialising</option>
+            <option value="fitness">Fitness</option>
+            <option value="chilling">Chilling</option>
+            <option value="exploring">Exploring</option>
+        </select><br><br>
+
+        <input type="submit" value="Create Event">
+    </form>
+</body>
+</html>
