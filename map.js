@@ -19,9 +19,9 @@ var map = L.map('map', {
 function makeIcon(url) {
     return L.icon({
         iconUrl: url,
-        iconSize: [30, 42],
-        iconAnchor: [15, 42],
-        popupAnchor: [0, -32]
+        iconSize: [35, 50],
+        iconAnchor: [17.5, 50],
+        popupAnchor: [0, -42.5]
     })
 }
 
@@ -38,13 +38,6 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-// var marker = L.marker([49.26036, -123.24961]).addTo(map);
 var marker = L.marker([49.26036, -123.24961], {icon: currentIcon}).addTo(map);
 marker.bindPopup(RealContent)
-// var marker = L.marker([49.28036, -123.24961]).addTo(map);
-// var marker = L.marker([49.26036, -123.25961]).addTo(map);
-// var marker = L.marker([49.27036, -123.25961]).addTo(map);
-// var marker = L.marker([49.28036, -123.25961]).addTo(map);
-// var marker = L.marker([49.26036, -123.26961]).addTo(map);
-// var marker = L.marker([49.27036, -123.26961]).addTo(map);
-// var marker = L.marker([49.28036, -123.26961]).addTo(map);
+// var marker = L.marker([49.26036, -123.24561]).addTo(map);
