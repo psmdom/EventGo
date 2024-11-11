@@ -126,3 +126,45 @@ var exerciseDescription = formatDescription("Spikeball", "Every Friday at 5:20 p
 // Sample markers:
 makeMarker(Locations.IKB_LIBRARY.position, Categories.STUDYING.icon, studyDescription);
 makeMarker(Locations.MACINNES_FIELD.position, Categories.EXERCISING.icon, exerciseDescription);
+
+// Setting the src of image
+document.getElementById("sidebar-icon").src = SBIconPath;
+
+// Filters
+
+// Get modal, filter icon and popup elements
+var modal = document.getElementById("filterModal");
+var filterIcon = document.getElementById("filter-icon");
+var applyFiltersButton = document.getElementById("applyFilters");
+
+// Open the popup when the filter icon is clicked
+filterIcon.onclick = function () {
+    modal.style.display = "block";
+}
+
+// Close the popup when clicking anywhere outside of it
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+// Close the popup when the "Apply Filters" button is clicked
+applyFiltersButton.onclick = function () {
+    var selectedFilters = [];
+
+    if (document.getElementById("filterOption1").checked) {
+        selectedFilters.push("Option 1");
+    }
+    if (document.getElementById("filterOption2").checked) {
+        selectedFilters.push("Option 2");
+    }
+    if (document.getElementById("filterOption3").checked) {
+        selectedFilters.push("Option 3");
+    }
+    if (document.getElementById("filterOption4").checked) {
+        selectedFilters.push("Option 4");
+    }
+
+    alert("Selected Filters: " + selectedFilters.join(", "));
+    modal.style.display = "none"; // Close modal after applying filters
