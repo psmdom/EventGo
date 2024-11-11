@@ -11,13 +11,15 @@
     </head>
 
     <body>
-        <!-- <iframe width="425" height="350" src="https://www.openstreetmap.org/export/embed.html?bbox=-123.30067634582521%2C49.24141838475618%2C-123.1985378265381%2C49.27928456996032&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/#map=14/49.26036/-123.24961">View Larger Map</a></small> -->
-        <div id="map"></div>
         <div class="sidebar">
-            <h2>Sidebar</h2>
-            <p>This is your sidebar content.</p>
-            <p>You can add more elements here as needed.</p>
+            <h2 class="sidebar-button">Sidebar</h2>
+            <a class="sidebar-button">Home</a>
+            <a class="sidebar-button">Filter</a>
+            <a class="sidebar-button">Saved</a>
+            <a class="sidebar-button">Options</a>
         </div>
+
+        <div class="content" id="map"></div>
     </body>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"

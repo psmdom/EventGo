@@ -1,7 +1,46 @@
 #map {
+    color: white;
+}
+
+/* Code for sidebar that will work for any device from https://www.w3schools.com/howto/howto_css_sidebar_responsive.asp */
+div.content {
+    margin: 0;
+    margin-left: 200px;
+    height: 1000px;
+}
+
+/* On screens that are less than 700px wide, make the sidebar into a topbar */
+@media screen and (max-width: 700px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    .sidebar a {float: left;}
+    div.content {margin-left: 0;}
+}
+
+/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+@media screen and (max-width: 400px) {
+    .sidebar a {
+        text-align: center;
+        float: none;
+    }
+}
+
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #053e57;
+    position: fixed;
     height: 100%;
-    width: 100%;
-    left: 0;
-    top: 0;
-    position: absolute;
+    overflow: auto;
+}
+
+.sidebar-button {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
 }
