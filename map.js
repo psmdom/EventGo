@@ -120,22 +120,12 @@ function makeMarker(position, icon, formattedDescription) {
 }
 
 // Sample descriptions:
-<<<<<<< HEAD
 var studyDescription = formatDescription("Study Session", "Every Tuesday at 3:00 p.m.", "IBLC, Room 192", "Come become an academic weapon with SUS.");
 var exerciseDescription = formatDescription("Spikeball", "Every Friday at 5:20 p.m.", "MacInnes Field", "Come play competitive or casual spikeball.");
 
 // Sample markers:
 makeMarker(Locations.IKB_LIBRARY.position, Categories.STUDYING.icon, studyDescription);
 makeMarker(Locations.MACINNES_FIELD.position, Categories.EXERCISING.icon, exerciseDescription);
-=======
-var studyDescription = makeDescription("Study Session", "Every Tuesday at 3:00 p.m.", "IBLC, Room 192");
-var exerciseDescription = makeDescription("Reading Break Party", "Every Friday at 5:20 p.m.", "MacInnes Field");
-
-// Sample markers:
-makeMarker(49.2674646, -123.2525383, iconStudying, studyDescription);
-makeMarker(49.262175, -123.261546, iconSocializing, exerciseDescription);
-makeMarker(49.262175, -123.261546, iconSocializing, iconDescription);
->>>>>>> db60e50 (Added a party for the videoi)
 
 // Setting the src of image
 document.getElementById("sidebar-icon").src = SBIconPath;
