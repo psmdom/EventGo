@@ -1,28 +1,96 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Map</title>
+<html lang="en">
 
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-        crossorigin=""/>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map</title>
 
-        <link rel="stylesheet" href="static/css/style.css">
-    </head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 
-    <body>
-        <!-- <iframe width="425" height="350" src="https://www.openstreetmap.org/export/embed.html?bbox=-123.30067634582521%2C49.24141838475618%2C-123.1985378265381%2C49.27928456996032&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/#map=14/49.26036/-123.24961">View Larger Map</a></small> -->
-        <div id="map"></div>
-        <div class="sidebar">
-            <h2>Sidebar</h2>
-            <p>This is your sidebar content.</p>
-            <p>You can add more elements here as needed.</p>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="static/css/style.css">
+
+    <style>
+        .popover-body .form-check {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="sidebar-icon">
+            <a href="#" target="_blank">
+                <img src="static/images/menu-icons/options.png" alt="Sidebar Icon 1" class="sidebar-icon-img">
+            </a>
         </div>
-    </body>
+
+        <div class="sidebar-consequent-icon-img">
+            <a href="#" id="filterIcon" data-bs-toggle="popover" data-bs-placement="right" data-bs-html="true">
+                <img src="static/images/menu-icons/filter.png" alt="Sidebar Icon 2" class="sidebar-icon-img">
+            </a>
+        </div>
+
+        <div class="sidebar-consequent-icon-img">
+            <a href="#" target="_blank">
+                <img src="static/images/menu-icons/save.png" alt="Sidebar Icon 3" class="sidebar-icon-img">
+            </a>
+        </div>
+    </div>
+
+    <div class="content" id="map"></div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""></script>
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="map.js"></script>
+
+    <script>
+        // Initialize the popover once the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            var filterIcon = document.getElementById('filterIcon');
+
+            // Popover content with checkbox HTML
+            var popoverContent = `
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Default checkbox
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Checked checkbox
+                    </label>
+                </div>
+            `;
+
+            // Initialize the popover on the filter icon
+            var popover = new bootstrap.Popover(filterIcon, {
+                html: true, // Allow HTML in content
+                content: popoverContent, // Set the HTML content for the popover
+                placement: 'right', // Placement of the popover (can also use 'top', 'left', 'bottom')
+            });
+
+            // Manually trigger the popover when the icon is clicked
+            filterIcon.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent the default link behavior
+                // Show or hide the popover on the filter icon
+                if (popover._isShown) {
+                    popover.hide();  // If popover is already shown, hide it
+                } else {
+                    popover.show();  // Otherwise, show the popover
+                }
+            });
+        });
+    </script>
+
+</body>
+
 </html>

@@ -1,27 +1,9 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>= -->
-    
-</head>
-
-<body>
-    <h1>Hello you are logged in. {{ current_user.username }}</h1>
-    <a href="{{url_for('logout')}}">Press here to logout</a>
-</body>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UBC Map with Plus Button</title>
+    <title>UBC Map with Plus Button and Form</title>
     
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
@@ -31,6 +13,8 @@
         #map {
             height: 100vh;
             width: 100%;
+            position: relative;
+            z-index: 0;
         }
 
         /* Styling for the plus button */
@@ -52,15 +36,117 @@
             text-decoration: none; /* Removes underline if using a link */
             z-index: 1000; /* Ensures button stays on top of map */
         }
+
+        /* Popup styling (right-side sliding form) */
+        #popupForm {
+            display: none;
+        }
+        #popupForm.show{
+            display: block;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .invisible{
+            display: none;
+        }
+
+        .submitForm {
+            position: fixed;
+            top: 3rem;
+            right: 3rem;
+            width: 300px;
+            height: fit-content;
+
+            padding: 2rem;
+            border: 2px solid black;
+            border-radius: 1rem;
+
+            background-color: #002244;
+            z-index: 2;
+            color: white;
+        }
+        .show {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .submitForm > form{
+            position: relative;
+            z-index: 2;
+        }
+
+        #formbackground {
+            background-color: black ;
+            filter: opacity(0.3);
+
+            position: fixed;
+            width: 100dvw;
+            height:100dvh;
+
+            top: 0;
+            left:0;
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
-
+    
     <!-- Map Container -->
     <div id="map"></div>
 
     <!-- Plus Button -->
-    <div class="plus-button">+</div>
+    <div class="plus-button" >+</div>
+
+    <div id="popupForm">
+    <form class="submitForm" action="#" method="POST">
+        <h1>Create an Event</h1>
+        <label for="title">Event Title:</label><br>
+        <input type="text" id="title" name="title" required><br><br>
+        
+        <label for="Location">Location:</label><br>
+        <input list="UBC PLACE" name="UBC PLACE"></label><br><br>
+
+        <datalist id="UBC PLACE">
+
+          <option value="AMS Student Nest">
+          <option value="Place Vanier Residence">
+          <option value="Totem Park Residence">
+          <option value="Orchard Commons Residence">
+          <option value="UBC Bookstore">
+          <option value="">
+          <option value="Poland">
+
+        </datalist>
+
+        
+        <label for="timeframe">Event Timeframe:</label><br>
+        <input type="datetime-local" id="timeframe" name="timeframe" required><br><br>
+        
+        <label for="category">Event Category:</label><br>
+        <select id="category" name="category" required>
+            <option value="academics">Academics</option>
+            <option value="socialising">Socialising</option>
+            <option value="fitness">Fitness</option>
+            <option value="chilling">Chilling</option>
+            <option value="exploring">Exploring</option>
+        </select><br><br>
+
+        <label for="Description">Description:</label><br>
+        <textarea id="Description" name="description" rows="8" cols="35" required></textarea><br><br>
+
+        <input type="submit" value="Create Event">
+    </form>
+    <div id="formbackground"></div>
+    </div>
+
+
 
     <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -85,6 +171,36 @@
 
         L.marker([49.2548, -123.234]).addTo(map)
             .bindPopup('Beaty Biodiversity Museum');
+
+        // Show the form popup when the plus button is clicked
+        const plusButton = document.querySelector('.plus-button');
+        const popupForm = document.getElementById('popupForm');
+        const closeButton = document.getElementById('closeButton');
+        const formBackground = document.getElementById("formbackground")
+
+        plusButton.addEventListener('click', function() {
+           
+            popupForm.classList.add('show');  // Slide in the form
+        });
+
+        // // Close the popup when the close button is clicked
+        // closeButton.addEventListener('click', function() {
+        //     popupForm.classList.remove('show');  // Slide out the form
+        // });
+
+        // Optionally, close the form when clicking outside of it
+        document.addEventListener('click', function(event) {
+            if (!popupForm.contains(event.target) && !plusButton.contains(event.target)) {
+                popupForm.classList.remove('show');
+            }
+        });
+
+        formBackground.addEventListener("click", ()=>{
+            popupForm.classList.remove("show")
+        })
+
+
     </script>
 </body>
 </html>
+

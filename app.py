@@ -1,10 +1,11 @@
-from flask import Flask, redirect, render_template, url_for
+from flask import Flask, redirect, render_template, request, url_for
 from flask_bcrypt import Bcrypt
 from flask_login import (LoginManager, UserMixin, current_user, login_required,
                          login_user, logout_user)
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField, SubmitField
+from wtforms import (DateTimeField, PasswordField, SelectMultipleField,
+                     StringField, SubmitField)
 from wtforms.validators import InputRequired, Length, ValidationError
 
 import constants
@@ -30,6 +31,15 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable=False)
+
+
+class Event(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(20), nullable=False, unique=True)
+    location = db.Column(db.String(80), nullable=False)
+    time = db.Column(db.String(80), nullable=False)
+    category = db.Column(db.String(80), nullable=False)
+    description = db.Column(db.String(80), nullable=False)
 
 
 class RegisterForm(FlaskForm):
@@ -59,6 +69,11 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 
+# @app.route('/view')
+# def view():
+#     return str(db.session.execute(db.select(Event)))
+
+
 @app.route('/')
 def home():
     return redirect(url_for('login'))
@@ -77,9 +92,21 @@ def login():
 
 
 @app.route('/dashboard', methods=['GET', 'POST'])
-@login_required
 def dashboard():
-    return render_template('dashboard.html')
+    if request.method == "POST":
+        form = request.form
+        new_event = Event(title=form["title"],
+                          location=form["UBC PLACE"],
+                          time=form["timeframe"],
+                          category=form["category"],
+                          description=form["description"]
+                          )
+        db.session.add(new_event)
+        db.session.commit()
+        # here
+        return redirect(url_for('dashboard'))
+    else:
+        return render_template('dashboard.html')
 
 
 @app.route('/logout', methods=['GET', 'POST'])
@@ -89,7 +116,7 @@ def logout():
     return redirect(url_for('login'))
 
 
-@ app.route('/register', methods=['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
     print(form.password.data)
@@ -112,7 +139,5 @@ def register():
 # with app.app_context():
 #     db.drop_all()
 #     db.create_all()
-
-
 if __name__ == "__main__":
     app.run(debug=True)
