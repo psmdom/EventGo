@@ -168,3 +168,4 @@ applyFiltersButton.onclick = function () {
 
     alert("Selected Filters: " + selectedFilters.join(", "));
     modal.style.display = "none"; // Close modal after applying filters
+}
